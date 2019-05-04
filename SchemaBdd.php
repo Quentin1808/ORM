@@ -223,7 +223,7 @@ class SchemaBdd
 
         }
 
-
+        //Voir pour demander si la personne veux effectuer les MAJs
         print "Voici la liste des requêtes effectuées : ";
         echo "\n";
         foreach ($listeQuery as $q){
