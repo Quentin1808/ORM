@@ -131,6 +131,8 @@ class SchemaBdd
             $jsonFile = file_get_contents($directory . "/" . $entite);
             $json = json_decode($jsonFile, true);
 
+            $listeQuery = array();
+
             $version = $json['version'];
             $tableName = $json['tableName'];
 
@@ -161,29 +163,34 @@ class SchemaBdd
                             if ($modifs['type'] == "add"){
 
                                 $query = "ALTER TABLE " . $tableName . " ADD " . $k . $v['type'] . " " . $v['property'];
-                                print_r($query);
+                                //print_r($query);
                                 Mysql::getInstance()->getConnection()->exec($query);
+
+                                array_push($listeQuery, $query);
 
                             }elseif ($modifs['type'] == "delete"){
 
                                 $query = "ALTER TABLE " . $tableName . " DROP " . $k;
-                                print_r($query);
+                                //print_r($query);
                                 Mysql::getInstance()->getConnection()->exec($query);
+                                array_push($listeQuery, $query);
 
                             }elseif ($modifs['type'] == "modify"){
 
                                 //Tester si il s'agit du nom de la colonne, du type ou des propriétés.
                                 if($modifs['name'] || $modifs['name'] != ""){
                                     $query = "ALTER TABLE " . $tableName . " CHANGE " . $k . " " . $modifs['name'] . " " . $v['type'];
-                                    print_r($query);
+                                    //print_r($query);
                                     Mysql::getInstance()->getConnection()->exec($query);
                                     $nameTemp = $modifs['name'];
+                                    array_push($listeQuery, $query);
                                 }
 
                                 if($modifs['typeChamp'] || $modifs['typeChamp'] != ""){
                                     $query = "ALTER TABLE " . $tableName . " MODIFY " . $nameTemp . " " . $modifs['typeChamp'];
-                                    print_r($query);
+                                    //print_r($query);
                                     Mysql::getInstance()->getConnection()->exec($query);
+                                    array_push($listeQuery, $query);
                                 }
 
 
@@ -210,13 +217,21 @@ class SchemaBdd
 
                 $query = "CREATE TABLE " . $tableName . " ( " . implode(' , ', $fields) . ")";
                 Mysql::getInstance()->getConnection()->exec($query);
-
+                array_push($listeQuery, $query);
 
             }
 
         }
 
 
+        print "Voici la liste des requêtes effectuées : ";
+        echo "\n";
+        foreach ($listeQuery as $q){
+            print $q;
+            echo "\n";
+        }
+        print "Vous pouvez maintenant mettre à jour chacun des fichiers de configurations des entités .";
+        echo "\n";
     }
 
 }
