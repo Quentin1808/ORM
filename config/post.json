@@ -1,0 +1,22 @@
+{
+  "fields": {
+    "id" : {
+      "type" : "int",
+      "property" : "AUTO_INCREMENT NOT NULL PRIMARY KEY",
+      "modification" : 0
+    },
+    "content" : {
+      "type" : "varchar(255)",
+      "property" : "",
+      "modification" : 1,
+      "listeModifications" : {
+        "type" : "modify",
+        "name" : "idTest",
+        "typeChamp" : "string",
+        "property" : ""
+      }
+    }
+  },
+  "version" : "0.1",
+  "tableName" : "posts"
+}
