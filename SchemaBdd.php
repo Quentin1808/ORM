@@ -11,12 +11,6 @@
 class SchemaBdd
 {
 
-    /**
-     * Récupérer tous les fichiers JSON du dossier config
-     * Créer les tables de chaque fichiers
-     * Enregistrer dans une table la version ainsi que le nom de la table correspondant
-     *
-     */
     public function createTables(){
 
         //TODO Récupérer tous les fichiers JSON du dossier config
@@ -85,6 +79,7 @@ class SchemaBdd
 
     }
 
+    //Fonction qui permet de vérifier si l type du champ est correcte
     public function checkTypes($typeValue, $champ){
         $types = array('INTEGER', 'INT', 'SMALLINT', 'TINYINT', 'MEDIUMINT', 'BIGINT', 'DECIMAL', 'NUMERIC', 'FLOAT', 'DOUBLE', 'DATE', 'DATETIME', 'TIMESTAMP', 'TEXT');
 
@@ -152,6 +147,7 @@ class SchemaBdd
 
                     $modification = $v['modification'];
 
+                    //On vérifie si il y a une modification dans le champ en question
                     if($modification == 1){
 
                         if (!$v['type'] || $v['type'] == ""){
@@ -223,7 +219,6 @@ class SchemaBdd
 
         }
 
-        //Voir pour demander si la personne veux effectuer les MAJs
         print "Voici la liste des requêtes effectuées : ";
         echo "\n";
         foreach ($listeQuery as $q){
