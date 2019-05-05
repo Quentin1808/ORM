@@ -8,11 +8,11 @@
     "content" : {
       "type" : "varchar(255)",
       "property" : "",
-      "modification" : 1,
+      "modification" : 0,
       "listeModifications" : {
-        "type" : "modify",
-        "name" : "idTest",
-        "typeChamp" : "string",
+        "type" : "",
+        "name" : "",
+        "typeChamp" : "",
         "property" : ""
       }
     }
